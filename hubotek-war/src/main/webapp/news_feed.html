@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,34 +38,34 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $('#divRss').FeedEk({
-            FeedUrl: 'http://localhost:8080/hubotek-war/google/news/w',
+            FeedUrl: 'http://localhost:8888/s_content/googleNews',
             MaxCount: 5,
             ShowDesc: false,
             ShowPubDate: true,
             DescCharacterLimit: 100,
             DateFormat: 'MM/DD/YYYY hh:mm:ss',
             DateFormatLang:'en',
-            RssHost:'http://localhost:8080/hubotek-war/google/news/w'
+            RssHost:'https://hubotek.appspot.com/s_content/news'
         });
         $('#divRss2').FeedEk({
-            FeedUrl: 'http://localhost:8080/hubotek-war/google/news/tc',
+            FeedUrl: 'http://localhost:8888/s_content/googleNews',
             MaxCount: 5,
             ShowDesc: false,
             ShowPubDate: true,
             DescCharacterLimit: 100,
             DateFormat: 'MM/DD/YYYY hh:mm:ss',
             DateFormatLang:'en',
-            RssHost:'http://localhost:8080/hubotek-war/google/news/tc'
+            RssHost:'https://hubotek.appspot.com/s_content/news?topic=tc'
         });
         $('#divRss3').FeedEk({
-            FeedUrl: 'http://localhost:8080/hubotek-war/google/news/e',
+            FeedUrl: 'http://localhost:8888/s_content/googleNews',
             MaxCount: 5,
             ShowDesc: false,
             ShowPubDate: true,
             DescCharacterLimit: 100,
             DateFormat: 'MM/DD/YYYY hh:mm:ss',
             DateFormatLang:'en',
-            RssHost:'http://localhost:8080/hubotek-war/google/news/e'
+            RssHost:'https://hubotek.appspot.com/s_content/news?topic=e'
         });
     });
 /*     var options = {

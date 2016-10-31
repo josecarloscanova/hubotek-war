@@ -7,7 +7,7 @@ import javax.ws.rs.core.Application;
 /**
  * @author Arun Gupta
  */
-@ApplicationPath("hubtek")
+@ApplicationPath("hub")
 public class HubotekApplication extends Application {
 
 }

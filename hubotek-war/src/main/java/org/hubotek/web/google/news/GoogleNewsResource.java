@@ -15,7 +15,7 @@ import javax.ws.rs.core.StreamingOutput;
 
 import org.hubotek.service.google.news.GoogleNewsService;
 
-@Path("/google/news")
+@Path("google/news")
 public class GoogleNewsResource {
 
 	@EJB 
