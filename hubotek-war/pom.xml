@@ -22,15 +22,40 @@
 			<groupId>javax</groupId>
 			<artifactId>javaee-web-api</artifactId>
 			<version>7.0</version>
+			<scope>compile</scope>
 		</dependency>
-			<dependency>
-				<groupId>org.hubotek</groupId>
-				<artifactId>hubotek-ejb</artifactId>
-			</dependency>
-			<dependency>
-				<groupId>org.hubotek</groupId>
-				<artifactId>model</artifactId>
-			</dependency>
+		<dependency>
+			<groupId>org.apache.johnzon</groupId>
+			<artifactId>johnzon-core</artifactId>
+			<version>0.9.5</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.johnzon/johnzon-mapper -->
+		<dependency>
+			<groupId>org.apache.johnzon</groupId>
+			<artifactId>johnzon-mapper</artifactId>
+			<version>0.9.5</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.johnzon/johnzon-jaxrs -->
+		<!-- https://mvnrepository.com/artifact/org.apache.johnzon/johnzon-jsonb -->
+		<dependency>
+			<groupId>org.apache.johnzon</groupId>
+			<artifactId>johnzon-jsonb</artifactId>
+			<version>0.9.5</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.johnzon/jsonb-api -->
+		<dependency>
+			<groupId>org.apache.johnzon</groupId>
+			<artifactId>jsonb-api</artifactId>
+			<version>0.9.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hubotek</groupId>
+			<artifactId>hubotek-ejb</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.hubotek</groupId>
+			<artifactId>model</artifactId>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>hubotek-war</finalName>

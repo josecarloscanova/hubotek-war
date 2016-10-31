@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 import javax.ejb.EJB;
+import javax.json.bind.spi.JsonbProvider;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
@@ -20,11 +20,11 @@ public class GoogleNewsResource {
 
 	@EJB 
 	GoogleNewsService googleNewsService; 
-//@PathParam("topic") String topic
+	
 	@GET
 	@Path("/top")
 	@Produces(MediaType.APPLICATION_XML)
-	public StreamingOutput getNewsTopic()
+	public StreamingOutput newsTop()
 	{ 
 		return new StreamingOutput() {
 			public void write(OutputStream outputStream)
@@ -37,7 +37,7 @@ public class GoogleNewsResource {
 	@GET
 	@Path("/tc")
 	@Produces(MediaType.APPLICATION_XML)
-	public StreamingOutput getNewsTcTopic()
+	public StreamingOutput newsTcTopic()
 	{ 
 		return new StreamingOutput() {
 			public void write(OutputStream outputStream)
@@ -50,7 +50,7 @@ public class GoogleNewsResource {
 	@GET
 	@Path("/w")
 	@Produces(MediaType.APPLICATION_XML)
-	public StreamingOutput getNewsWTopic()
+	public StreamingOutput newsWTopic()
 	{ 
 		return new StreamingOutput() {
 			public void write(OutputStream outputStream)
@@ -63,7 +63,7 @@ public class GoogleNewsResource {
 	@GET
 	@Path("/e")
 	@Produces(MediaType.APPLICATION_XML)
-	public StreamingOutput getNewsETopic()
+	public StreamingOutput newsETopic()
 	{ 
 		return new StreamingOutput() {
 			public void write(OutputStream outputStream)
@@ -76,12 +76,25 @@ public class GoogleNewsResource {
 	@GET
 	@Path("/search")
 	@Produces(MediaType.APPLICATION_XML)
-	public StreamingOutput searc(@QueryParam("s") String search)
+	public StreamingOutput search(@QueryParam("s") String search)
 	{ 
 		return new StreamingOutput() {
 			public void write(OutputStream outputStream)
 					throws IOException, WebApplicationException {
 				outputStream.write(googleNewsService.processRequestSearch(search).getBytes());
+			}
+		};
+	}
+	
+	@GET
+	@Path("/search_json")
+	@Produces(MediaType.APPLICATION_JSON)
+	public StreamingOutput search_json(@QueryParam("s") String search)
+	{ 
+		return new StreamingOutput() {
+			public void write(OutputStream outputStream)
+					throws IOException, WebApplicationException {
+				outputStream.write(JsonbProvider.provider().create().build().toJson(googleNewsService.processRequestSearchHub(search)).getBytes());
 			}
 		};
 	}
