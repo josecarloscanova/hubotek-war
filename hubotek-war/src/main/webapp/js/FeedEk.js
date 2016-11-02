@@ -20,8 +20,49 @@
             TitleLinkTarget: "_blank",
             DateFormat: "",
             DateFormatLang:"en",
-            RssHost: "https://hubotek.appspot.com/s_content/googleNews"
+            logConsole:false,
+            RssHost: "https://hubotek.appspot.com/s_content/googleNews",
+            rssData:null
         }, opt);
+        
+        var processDataFeed = function(data){ 
+            $("#" + id).empty();
+            var inc = 0;
+            if (data.rssItems instanceof Array && data.rssItems.length > def.MaxCount){
+            	def.rssData = data.rssItems.slice(def.MaxCount-1);
+            }
+            $.each(def.rssData, function (e, itm) {
+            	inc++;
+                s += '<div class="itemTitle"><a href="' + itm.link + '" target="' + def.TitleLinkTarget + '" >' + itm.title + '</a></div>';
+                
+                if (def.ShowPubDate){
+                    dt = new Date(itm.pubDate);
+                    s += '<div class="itemDate">';
+                    if ($.trim(def.DateFormat).length > 0) {
+                        try {
+                            moment.lang(def.DateFormatLang);
+                            s += moment(dt).format(def.DateFormat);
+                        }
+                        catch (e){s += dt.toLocaleDateString();}                            
+                    }
+                    else {
+                        s += dt.toLocaleDateString();
+                    }
+                    s += '</div>';
+                }
+                if (def.ShowDesc) {
+                    s += '<div class="itemContent">';
+                     if (def.DescCharacterLimit > 0 && itm.length > def.DescCharacterLimit) {
+                        s += itm.description.substring(0, def.DescCharacterLimit) + '...';
+                    }
+                    else {
+                        s += itm.description;
+                     }
+                     s += '</div>';
+                }
+            });
+            $("#" + id).append('<div class="row">' + s + '</div>');
+        };
         
         var id = $(this).attr("id"), i, s = "", dt;
         $("#" + id).empty();
@@ -32,42 +73,9 @@
             url: def.RssHost,
             dataType: "json",
             success: function (data) {
-                $("#" + id).empty();
-                var inc = 0;
-                if (data.rssItems instanceof Array && data.rssItems.length > def.MaxCount){
-                	data.rssItems = data.rssItems.slice(def.MaxCount-1);
-                }
-                $.each(data.rssItems, function (e, itm) {
-                	inc++;
-                    s += '<li><div class="itemTitle"><a href="' + itm.link + '" target="' + def.TitleLinkTarget + '" >' + itm.title + '</a></div>';
-                    
-                    if (def.ShowPubDate){
-                        dt = new Date(itm.pubDate);
-                        s += '<div class="itemDate">';
-                        if ($.trim(def.DateFormat).length > 0) {
-                            try {
-                                moment.lang(def.DateFormatLang);
-                                s += moment(dt).format(def.DateFormat);
-                            }
-                            catch (e){s += dt.toLocaleDateString();}                            
-                        }
-                        else {
-                            s += dt.toLocaleDateString();
-                        }
-                        s += '</div>';
-                    }
-                    if (def.ShowDesc) {
-                        s += '<div class="itemContent">';
-                         if (def.DescCharacterLimit > 0 && itm.length > def.DescCharacterLimit) {
-                            s += itm.description.substring(0, def.DescCharacterLimit) + '...';
-                        }
-                        else {
-                            s += itm.description;
-                         }
-                         s += '</div>';
-                    }
-                });
-                $("#" + id).append('<ul class="feedEkList">' + s + '</ul>');
+            	if (def.logConsole){ console.log(data);}
+            	processDataFeed(data);	
+          //$("#" + id).append('<ul class="feedEkList">' + s + '</ul>');
             }
         });
     };

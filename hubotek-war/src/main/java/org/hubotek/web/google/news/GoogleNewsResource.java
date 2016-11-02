@@ -23,65 +23,69 @@ public class GoogleNewsResource {
 	
 	@GET
 	@Path("/top")
-	@Produces(MediaType.APPLICATION_XML)
+	@Produces(MediaType.APPLICATION_JSON)
 	public StreamingOutput newsTop()
 	{ 
 		return new StreamingOutput() {
 			public void write(OutputStream outputStream)
 					throws IOException, WebApplicationException {
-				outputStream.write(googleNewsService.processRequestTop().getBytes());
+				outputStream.write(JsonbProvider.provider().create().build().toJson(googleNewsService.processRequestTop()).getBytes());
+				outputStream.flush();
 			}
 		};
 	}
 	
 	@GET
 	@Path("/tc")
-	@Produces(MediaType.APPLICATION_XML)
+	@Produces(MediaType.APPLICATION_JSON)
 	public StreamingOutput newsTcTopic()
 	{ 
 		return new StreamingOutput() {
 			public void write(OutputStream outputStream)
 					throws IOException, WebApplicationException {
-				outputStream.write(googleNewsService.processRequest().getBytes());
+				outputStream.write(JsonbProvider.provider().create().build().toJson(googleNewsService.processRequest()).getBytes());
+				outputStream.flush();
 			}
 		};
 	}
 	
 	@GET
 	@Path("/w")
-	@Produces(MediaType.APPLICATION_XML)
+	@Produces(MediaType.APPLICATION_JSON)
 	public StreamingOutput newsWTopic()
 	{ 
 		return new StreamingOutput() {
 			public void write(OutputStream outputStream)
 					throws IOException, WebApplicationException {
-				outputStream.write(googleNewsService.processRequestWorld().getBytes());
+				outputStream.write(JsonbProvider.provider().create().build().toJson(googleNewsService.processRequestWorld()).getBytes());
+				outputStream.flush();
 			}
 		};
 	}
 	
 	@GET
 	@Path("/e")
-	@Produces(MediaType.APPLICATION_XML)
+	@Produces(MediaType.APPLICATION_JSON)
 	public StreamingOutput newsETopic()
 	{ 
 		return new StreamingOutput() {
 			public void write(OutputStream outputStream)
 					throws IOException, WebApplicationException {
-				outputStream.write(googleNewsService.processRequestEntertainement().getBytes());
+				outputStream.write(JsonbProvider.provider().create().build().toJson(googleNewsService.processRequestEntertainement()).getBytes());
 			}
 		};
 	}
 
 	@GET
 	@Path("/search")
-	@Produces(MediaType.APPLICATION_XML)
+	@Produces(MediaType.APPLICATION_JSON)
 	public StreamingOutput search(@QueryParam("s") String search)
 	{ 
 		return new StreamingOutput() {
 			public void write(OutputStream outputStream)
 					throws IOException, WebApplicationException {
-				outputStream.write(googleNewsService.processRequestSearch(search).getBytes());
+				outputStream.write(JsonbProvider.provider().create().build().toJson(googleNewsService.processRequestSearch(search)).getBytes());
+				outputStream.flush();
 			}
 		};
 	}
@@ -95,6 +99,7 @@ public class GoogleNewsResource {
 			public void write(OutputStream outputStream)
 					throws IOException, WebApplicationException {
 				outputStream.write(JsonbProvider.provider().create().build().toJson(googleNewsService.processRequestSearchHub(search)).getBytes());
+				outputStream.flush();
 			}
 		};
 	}
