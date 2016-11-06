@@ -49,6 +49,49 @@ public class GoogleNewsResource {
 		};
 	}
 	
+
+	@GET
+	@Path("/n")
+	@Produces(MediaType.APPLICATION_JSON)
+	public StreamingOutput newsCountryTopic()
+	{ 
+		return new StreamingOutput() {
+			public void write(OutputStream outputStream)
+					throws IOException, WebApplicationException {
+				outputStream.write(JsonbProvider.provider().create().build().toJson(googleNewsService.processRequestCountry()).getBytes());
+				outputStream.flush();
+			}
+		};
+	}
+	
+	@GET
+	@Path("/m")
+	@Produces(MediaType.APPLICATION_JSON)
+	public StreamingOutput newsHealthTopic()
+	{ 
+		return new StreamingOutput() {
+			public void write(OutputStream outputStream)
+					throws IOException, WebApplicationException {
+				outputStream.write(JsonbProvider.provider().create().build().toJson(googleNewsService.processRequestHealth()).getBytes());
+				outputStream.flush();
+			}
+		};
+	}
+
+	@GET
+	@Path("/s")
+	@Produces(MediaType.APPLICATION_JSON)
+	public StreamingOutput newsSportsTopic()
+	{ 
+		return new StreamingOutput() {
+			public void write(OutputStream outputStream)
+					throws IOException, WebApplicationException {
+				outputStream.write(JsonbProvider.provider().create().build().toJson(googleNewsService.processRequestSports()).getBytes());
+				outputStream.flush();
+			}
+		};
+	}
+	
 	@GET
 	@Path("/w")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -66,7 +109,7 @@ public class GoogleNewsResource {
 	@GET
 	@Path("/e")
 	@Produces(MediaType.APPLICATION_JSON)
-	public StreamingOutput newsETopic()
+	public StreamingOutput newsEntertaimentTopic()
 	{ 
 		return new StreamingOutput() {
 			public void write(OutputStream outputStream)
@@ -90,17 +133,4 @@ public class GoogleNewsResource {
 		};
 	}
 	
-	@GET
-	@Path("/search_json")
-	@Produces(MediaType.APPLICATION_JSON)
-	public StreamingOutput search_json(@QueryParam("s") String search)
-	{ 
-		return new StreamingOutput() {
-			public void write(OutputStream outputStream)
-					throws IOException, WebApplicationException {
-				outputStream.write(JsonbProvider.provider().create().build().toJson(googleNewsService.processRequestSearchHub(search)).getBytes());
-				outputStream.flush();
-			}
-		};
-	}
 }

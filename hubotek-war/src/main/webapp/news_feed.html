@@ -28,7 +28,7 @@
 	  <div class="form-group">
 	    <input id="s" name="s" type="text" class="form-control" placeholder="Search">
 	  </div>
-  		<button id="navSearchButton" type="submit" class="btn btn-default">Submit</button>
+  		<button id="navSearchButton" type="submit" class="btn btn-default">Search</button>
 	</div>
 </form>
 </div>
@@ -39,7 +39,10 @@
 						<li role="tab" tabindex="0" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab ui-tabs-active ui-state-active" aria-controls="tabs-1" aria-labelledby="ui-id-11" aria-selected="true" aria-expanded="true"><a href="#tabs-1" role="presentation" tabindex="-1" class="ui-tabs-anchor" id="ui-id-11">Top</a></li>
 						<li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-2" aria-labelledby="ui-id-12" aria-selected="false" aria-expanded="false"><a href="#tabs-2" role="presentation" tabindex="-1" class="ui-tabs-anchor" id="ui-id-12">World</a></li>
 						<li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-3" aria-labelledby="ui-id-13" aria-selected="false" aria-expanded="false"><a href="#tabs-3" role="presentation" tabindex="-1" class="ui-tabs-anchor" id="ui-id-13">Technology</a></li>
-						<li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-4" aria-labelledby="ui-id-14" aria-selected="false" aria-expanded="false"><a href="#tabs-1" role="presentation" tabindex="-1" class="ui-tabs-anchor" id="ui-id-11">Entertaiment</a></li>
+						<li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-4" aria-labelledby="ui-id-14" aria-selected="false" aria-expanded="false"><a href="#tabs-4" role="presentation" tabindex="-1" class="ui-tabs-anchor" id="ui-id-14">Entertaiment</a></li>
+						<li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-5" aria-labelledby="ui-id-15" aria-selected="false" aria-expanded="false"><a href="#tabs-5" role="presentation" tabindex="-1" class="ui-tabs-anchor" id="ui-id-15">Country</a></li>
+						<li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-6" aria-labelledby="ui-id-16" aria-selected="false" aria-expanded="false"><a href="#tabs-6" role="presentation" tabindex="-1" class="ui-tabs-anchor" id="ui-id-16">Sports</a></li>
+						<li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-7" aria-labelledby="ui-id-17" aria-selected="false" aria-expanded="false"><a href="#tabs-7" role="presentation" tabindex="-1" class="ui-tabs-anchor" id="ui-id-17">Health</a></li>
 					</ul>
 					<div id="tabs-1" aria-labelledby="ui-id-11" role="tabpanel" class="ui-tabs-panel ui-corner-bottom ui-widget-content" aria-hidden="false" style="display: block;">
 						          <div id="divRss"></div>
@@ -51,6 +54,15 @@
 						<div id="divRss3"></div>
 					</div><div id="tabs-4" aria-labelledby="ui-id-14" role="tabpanel" class="ui-tabs-panel ui-corner-bottom ui-widget-content" aria-hidden="true" style="display: none;">
 						<div id="divRss4"></div>
+					</div>
+					<div id="tabs-5" aria-labelledby="ui-id-15" role="tabpanel" class="ui-tabs-panel ui-corner-bottom ui-widget-content" aria-hidden="true" style="display: none;">
+						<div id="divRss5"></div>
+					</div>
+					<div id="tabs-6" aria-labelledby="ui-id-16" role="tabpanel" class="ui-tabs-panel ui-corner-bottom ui-widget-content" aria-hidden="true" style="display: none;">
+						<div id="divRss6"></div>
+					</div>
+					<div id="tabs-7" aria-labelledby="ui-id-17" role="tabpanel" class="ui-tabs-panel ui-corner-bottom ui-widget-content" aria-hidden="true" style="display: none;">
+						<div id="divRss7"></div>
 					</div>
 				</div>  
 		 </div>  
@@ -112,6 +124,39 @@
             DateFormat: 'MM/DD/YYYY hh:mm:ss',
             DateFormatLang:'en',
             RssHost:'/hubotek/hub/google/news/e'
+        });
+        $('#divRss5').FeedEk({
+            FeedUrl: 'http://localhost:8080/hubotek-war/hub/google/news/w',
+            MaxCount: 5,
+            ShowDesc: false,
+            ShowPubDate: true,
+            DescCharacterLimit: 200,
+            logConsole:true,
+            DateFormat: 'MM/DD/YYYY hh:mm:ss',
+            DateFormatLang:'en',
+            RssHost:'/hubotek/hub/google/news/n'
+        });
+        $('#divRss6').FeedEk({
+            FeedUrl: 'http://localhost:8080/hubotek-war/hub/google/news/w',
+            MaxCount: 5,
+            ShowDesc: false,
+            ShowPubDate: true,
+            DescCharacterLimit: 200,
+            logConsole:true,
+            DateFormat: 'MM/DD/YYYY hh:mm:ss',
+            DateFormatLang:'en',
+            RssHost:'/hubotek/hub/google/news/s'
+        });
+        $('#divRss7').FeedEk({
+            FeedUrl: 'http://localhost:8080/hubotek-war/hub/google/news/w',
+            MaxCount: 5,
+            ShowDesc: false,
+            ShowPubDate: true,
+            DescCharacterLimit: 200,
+            logConsole:true,
+            DateFormat: 'MM/DD/YYYY hh:mm:ss',
+            DateFormatLang:'en',
+            RssHost:'/hubotek/hub/google/news/m'
         });
     });
 /*     var options = {

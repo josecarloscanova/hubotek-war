@@ -28,10 +28,11 @@
         var processDataFeed = function(data){ 
             $("#" + id).empty();
             var inc = 0;
+            var rssData = undefined;
             if (data.rssItems instanceof Array && data.rssItems.length > def.MaxCount){
-            	def.rssData = data.rssItems.slice(def.MaxCount-1);
+            	rssData = data.rssItems.slice(def.MaxCount-1);
             }
-            $.each(def.rssData, function (e, itm) {
+            $.each(rssData, function (e, itm) {
             	inc++;
                 s += '<div class="itemTitle"><a href="' + itm.link + '" target="' + def.TitleLinkTarget + '" >' + itm.title + '</a></div>';
                 
@@ -75,7 +76,6 @@
             success: function (data) {
             	if (def.logConsole){ console.log(data);}
             	processDataFeed(data);	
-          //$("#" + id).append('<ul class="feedEkList">' + s + '</ul>');
             }
         });
     };
