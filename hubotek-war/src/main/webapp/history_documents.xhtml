@@ -14,22 +14,24 @@
 			</button>
 			<h:panelGrid id="panel_2">
 				<p:dataTable var="h" value="#{historyView.historyDocuments}">
-					    <p:column headerText="Id">
-					        <h:outputText value="#{h.id}" />
-					    </p:column>
-					 
-					    <p:column headerText="Year">
-					        <h:outputText value="#{h.title}" />
-					    </p:column>
-					 
-					    <p:column headerText="Brand">
-					        <a target="_blank" href="#{h.link}"><h:outputText value="#{h.link}" /></a>
-					    </p:column>
-					 
-					    <p:column headerText="Color">
-					        <h:outputText value="#{h.pubDate}" />
-					    </p:column>
-					</p:dataTable>
+
+					<p:column headerText="Title">
+						<h:outputText value="#{h.title}" />
+					</p:column>
+
+					<p:column headerText="Link">
+						<p:commandLink  
+							action="#{historyView.findHistoryDocumentItems(h.id)}"  ajax="false">
+							<h:outputText value="View Item Details" />
+						</p:commandLink>
+						<a target="_blank" href="#{h.link}"><h:outputText
+								value="#{h.link}" /></a>
+					</p:column>
+
+					<p:column headerText="Pub Date">
+						<h:outputText value="#{h.pubDate}" />
+					</p:column>
+				</p:dataTable>
 			</h:panelGrid>
 		</form>
 	</ui:define>

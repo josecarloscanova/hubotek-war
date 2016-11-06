@@ -65,6 +65,14 @@
 			<groupId>org.hubotek</groupId>
 			<artifactId>view</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.omnifaces</groupId>
+			<artifactId>omnifaces</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>hubotek-war</finalName>
@@ -98,7 +106,19 @@
 				<groupId>org.hubotek</groupId>
 				<artifactId>view</artifactId>
 				<version>1.0</version>
-				<scope>runtime</scope>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.omnifaces</groupId>
+				<artifactId>omnifaces</artifactId>
+				<version>2.5.1</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.primefaces</groupId>
+				<artifactId>primefaces</artifactId>
+				<version>6.0</version>
+				<scope>compile</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

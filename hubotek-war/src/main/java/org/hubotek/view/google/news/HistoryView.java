@@ -8,19 +8,23 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
 import org.hubotek.service.ejb.SearchHistoryProvider;
-import org.hubotek.service.ejb.document.HubDocumentProvider;
 import org.hubotek.view.View;
 import org.hubotek.view.search.history.HistoryDocument;
+import org.hubotek.view.search.history.HistoryDocumentItem;
 
 @SuppressWarnings("serial")
-@ManagedBean(name="searchBean")
+@ManagedBean(name="historyView")
 @RequestScoped
 public class HistoryView implements View<HistoryView>{
 
 	@EJB
 	SearchHistoryProvider searchHistoryProvider;
 	
-	List<HistoryDocument>  historyDocuments; 
+	List<HistoryDocument>  historyDocuments;
+	
+	List<HistoryDocumentItem> historyDocumentItems;
+	
+	private Long currentDocumentId;
 	
 	public HistoryView(){}
 	
@@ -36,11 +40,30 @@ public class HistoryView implements View<HistoryView>{
 	}
 
 	public List<HistoryDocument> getHistoryDocuments() {
-		return historyDocuments;
+		return searchHistoryProvider.findHistoryDocuments();
 	}
 
-	public void setHistoryDocuments(List<HistoryDocument> historyDocuments) {
-		this.historyDocuments = historyDocuments;
+	public void processSomething()
+	{ 
+		System.out.println("something as executed");
+	}
+
+	public String findHistoryDocumentItems(Long documentId)
+	{ 
+		historyDocumentItems = searchHistoryProvider.findItemByDocumentId(documentId);
+		return "history_documents_items";
+	}
+	
+	public Long getCurrentDocumentId() {
+		return currentDocumentId;
+	}
+
+	public void setCurrentDocumentId(Long currentDocumentId) {
+		this.currentDocumentId = currentDocumentId;
+	}
+
+	public List<HistoryDocumentItem> getHistoryDocumentItems() {
+		return historyDocumentItems;
 	}
 
 }
