@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>flickty-layout</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+<link href="css/flickity.css" rel="stylesheet" type="text/css" />
+<link href="css/FeedEk.css" rel="stylesheet" type="text/css" />
+<link href="css/flickty-config.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript"  src="js/jquery-3.1.1.js"></script>
+<script type="text/javascript"  src="js/flickity.pkgd.js"></script>
+<script type="text/javascript"  src="js/bootstrap.js"></script>  
+<script type="text/javascript" src="js/flickty-event-listeners.js"></script>
+<script type="text/javascript" src="js/moment.js"></script>
+<script type="text/javascript" src="js/hubotek.js"></script> 
+<script type="text/javascript" src="js/FeedEk.js"></script> 
+</head>
+<body>
+<div class="container">
+<div class="rssDiv row" >
+<!-- Flickity HTML init -->
+		<div class="carousel"
+		  data-flickity='{ "cellSelector": ".carousel-cell" }'>
+		  <div class="carousel-cell">
+			  <div id="divRss" class="feed-cell" style="margin-left:20px;margin-right:20px">
+			  </div>
+		  </div>
+		  <div class="carousel-cell"></div>
+		  <div class="carousel-cell"></div>
+		  <div class="carousel-cell"></div>
+		  <div class="carousel-cell"></div>
+		</div>
+	</div>
+</div>
+<script>
+$('#divRss').FeedEk({
+            FeedUrl: 'http://localhost:8080/hubotek-war/hub/google/news/top',
+            MaxCount: 5,
+            ShowDesc: true,
+            ShowPubDate: true,
+            DescCharacterLimit: 300,
+            DateFormat: 'MM/DD/YYYY hh:mm:ss',
+            DateFormatLang:'en',
+            RssHost:'http://localhost:8080/hubotek/hub/google/news/top'
+        });
+</script>
+</body>
+</html>

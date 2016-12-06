@@ -54,10 +54,10 @@
                 if (def.ShowDesc) {
                     s += '<div class="itemContent">';
                      if (def.DescCharacterLimit > 0 && itm.length > def.DescCharacterLimit) {
-                        s += itm.description.substring(0, def.DescCharacterLimit) + '...';
+                        s += itm.rssItemDescription.description.substring(0, def.DescCharacterLimit) + '...';
                     }
                     else {
-                        s += itm.description;
+                        s += itm.rssItemDescription.description;
                      }
                      s += '</div>';
                 }

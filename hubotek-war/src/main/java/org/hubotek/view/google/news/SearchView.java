@@ -13,7 +13,7 @@ import org.hubotek.view.View;
 @SuppressWarnings("serial")
 @ManagedBean(name="searchBean")
 @RequestScoped
-public class SearchView implements View<SearchView>{
+public class SearchView implements View{
 
 	Map<String,Object> applicationMap;
 	

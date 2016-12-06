@@ -5,29 +5,29 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:jsf="http://xmlns.jcp.org/jsf"
-	template="templates/main_template.xhtml">
-	<ui:define name="content">
+	template="templates/composition_template.xhtml">
+	<ui:define name="main_content">
 		<form jsf:id="input_form">
-			<button jsf:action="#{historyView.processSomething()}">
+		    <p:remoteCommand name="ps" update="pt" action="#{historyView.processSomething()}" />
+			<button type="button" onClick="ps()">
 				Jump Result
-				<f:ajax render=":panel_2" />
 			</button>
 			<h:panelGrid id="panel_2">
-				<p:dataTable var="h" value="#{historyView.historyDocuments}">
+				<p:dataTable  id="pt"  var="h" value="#{historyView.historyDocuments}">
 
 					<p:column headerText="Title">
 						<h:outputText value="#{h.title}" />
 					</p:column>
-
 					<p:column headerText="Link">
 						<p:commandLink  
 							action="#{historyView.findHistoryDocumentItems(h.id)}"  ajax="false">
 							<h:outputText value="View Item Details" />
 						</p:commandLink>
-						<a target="_blank" href="#{h.link}"><h:outputText
-								value="#{h.link}" /></a>
 					</p:column>
-
+					<p:column headerText="External Link">
+						<a target="_blank" href="#{h.link}"><h:outputText
+									value="#{h.link}" /></a>
+					</p:column>
 					<p:column headerText="Pub Date">
 						<h:outputText value="#{h.pubDate}" />
 					</p:column>

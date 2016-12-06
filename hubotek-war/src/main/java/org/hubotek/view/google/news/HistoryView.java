@@ -12,10 +12,9 @@ import org.hubotek.view.View;
 import org.hubotek.view.search.history.HistoryDocument;
 import org.hubotek.view.search.history.HistoryDocumentItem;
 
-@SuppressWarnings("serial")
 @ManagedBean(name="historyView")
 @RequestScoped
-public class HistoryView implements View<HistoryView>{
+public class HistoryView implements View{
 
 	@EJB
 	SearchHistoryProvider searchHistoryProvider;
@@ -26,12 +25,17 @@ public class HistoryView implements View<HistoryView>{
 	
 	private Long currentDocumentId;
 	
+	private Integer offSet;
+	
+	private Integer limit;
+	
 	public HistoryView(){}
 	
 	@PostConstruct
 	public void prepare()
 	{
-		historyDocuments = searchHistoryProvider.findHistoryDocuments();
+		offSet = 0;
+		limit = 0;
 	}
 	
 	@Override
@@ -40,7 +44,7 @@ public class HistoryView implements View<HistoryView>{
 	}
 
 	public List<HistoryDocument> getHistoryDocuments() {
-		return searchHistoryProvider.findHistoryDocuments();
+		return searchHistoryProvider.findHistoryDocuments(offSet , limit);
 	}
 
 	public void processSomething()
@@ -64,6 +68,22 @@ public class HistoryView implements View<HistoryView>{
 
 	public List<HistoryDocumentItem> getHistoryDocumentItems() {
 		return historyDocumentItems;
+	}
+
+	public Integer getOffSet() {
+		return offSet;
+	}
+
+	public void setOffSet(Integer offSet) {
+		this.offSet = offSet;
+	}
+
+	public Integer getLimit() {
+		return limit;
+	}
+
+	public void setLimit(Integer limit) {
+		this.limit = limit;
 	}
 
 }

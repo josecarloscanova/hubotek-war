@@ -1,0 +1,56 @@
+<!-- File: chapter6/public/http-get-example.html -->
+<html>
+<head>
+<title>$http get example</title>
+<style>
+.item {
+padding: 10px;
+}
+</style>
+</head>
+<body>
+<div ng-app="notesApp">
+<div class="container-fluid">
+	<div ng-controller="MainCtrl as mainCtrl">
+			<h1>Hello Servers!</h1>
+			<div class="teste"><span>{{mainCtrl.item.rssBody.title}}</span></div>
+			<div ng-repeat="item in mainCtrl.item.rssItems" class="item">
+			<div><span ng-bind="item.title"></span></div>
+			<div><a href="{{item.link}}" target="_blank"><span ng-bind="item.title"></span></a></div>
+			<div class="description"><span ng-bind-html="item.rssItemDescription.description"></span></div>
+			</div>
+	</div>
+</div>
+</div>
+<script
+src="js/angular.js">
+</script>
+<script
+src="js/jquery-3.1.1.js">
+</script>
+<script
+src="js/bootstrap.js">
+</script>
+<script
+src="js/bootstrap-carrousel.js"></script>
+<script>
+angular.module('notesApp', [])
+.config(function($sceProvider) {
+  // Completely disable SCE.  For demonstration purposes only!
+  // Do not use in new projects.
+  $sceProvider.enabled(false);
+})
+.controller('MainCtrl', ['$http', '$scope', function($http,$scope) {
+var self = this;
+self.item = {};
+console.log($scope);
+$http.get('http://localhost:8080/hubotek/hub/google/news/top').then(function(response) {
+self.item = response.data;
+console.log(self.item);
+}, function(errResponse) {
+console.error('Error while fetching top data');
+});
+}]);
+</script>
+</body>
+</html>

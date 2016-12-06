@@ -1,0 +1,51 @@
+/* external css: flickity.css */
+
+* { box-sizing: border-box; }
+
+body { font-family: sans-serif; }
+
+.carousel {
+  background: #FAFAFA;
+  position: relative;
+  height: 580px;
+}
+
+.carousel-cell {
+  width: 88%;
+  height: 100%;
+  margin-top:10px;
+  margin-right: 10px;
+  background: #141414;
+  border-radius: 5px;
+  counter-increment: carousel-cell;
+}
+
+/* cell number */
+.carousel-cell:before {
+  display: block;
+  text-align: center;
+  content: counter(carousel-cell);
+  line-height: 200px;
+  font-size: 80px;
+  color: white;
+}
+
+.static-banner {
+  position: absolute;
+  background: hsla(0, 0%, 0%, 0.3);
+  z-index: 1;
+  padding: 2px 20px;
+  font-size: 26px;
+  color: white;
+  pointer-events: none;
+}
+
+.static-banner1 {
+  left: 10px;
+  top: 10px;
+}
+
+.static-banner2 {
+  right: 10px;
+  bottom: 10px;
+}
