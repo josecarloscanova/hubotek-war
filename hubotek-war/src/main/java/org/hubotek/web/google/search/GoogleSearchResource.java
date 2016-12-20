@@ -36,19 +36,23 @@ public class GoogleSearchResource {
 	        @DefaultValue("partner-pub-6996754678263425:6706236868") @QueryParam("cx") String cx,
 	        @DefaultValue("us") @QueryParam("language") String language,           
 	        @DefaultValue("off") @QueryParam("safe") String safe,
-	        @DefaultValue("date") @QueryParam("sort") String sort)
+	        @DefaultValue("") @QueryParam("sort") String sort , 
+	        @DefaultValue("1") @QueryParam("startIndex") Integer startIndex,
+	        @DefaultValue("10") @QueryParam("count") Integer count)
 	{ 
 		SearchParameterTemplate spt = new SearchParameterTemplate();
-		spt.setSearchTerms(URLEncoder.encode(search));
+		spt.setSearchTerms(search);
 		spt.setAlt(alt);
 		spt.setCx(cx);
 		spt.setLanguage(language);
 		spt.setSafe(safe);
 		spt.setSort(sort);
+		spt.setStartIndex(startIndex);
+		spt.setNum(count);
 		return new StreamingOutput() {
 			public void write(OutputStream outputStream)
 					throws IOException, WebApplicationException {
-				outputStream.write(JsonbProvider.provider().create().build().toJson(googleSearchService.doSearch(spt)).getBytes());
+				outputStream.write(JsonbProvider.provider().create().build().toJson(googleSearchService.doSearch(spt)).getBytes("UTF-8"));
 				outputStream.flush();
 			}
 		};

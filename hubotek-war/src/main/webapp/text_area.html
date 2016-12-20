@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>text_area</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<script src="js/jquery-3.1.1.js"></script>
+</head>
+<body>
+<script>
+$(document).ready(function(){
+	// custom counter container
+$("#formalizacao_status_observacao_txt").maxlength({
+    counterContainer: $(".counter-container")
+});
+}
+</script>
+<form>	
+     <div>
+     	<span class=".counter-container"></span>
+     </div>
+	 <textarea  maxlength="50" style="width:100%; height:70px; margin-top:4px;" id="formalizacao_status_observacao_txt"></textarea>  
+</form>
+</body>
+</html>

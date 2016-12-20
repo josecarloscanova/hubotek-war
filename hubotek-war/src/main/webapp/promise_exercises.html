@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+<head>
+<title>promisse_exercises</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<script src="js/jquery-3.1.1.js"></script>
+</head>
+<body>
+<script>
+const foo = Promise.reject ('rejection!');
+foo.then(x => {
+	console.log('');
+});
+
+foo.catch(x => {console.log(x);});
+
+
+foo.catch(x=>{console.log('another ' + x)});
+
+</script>
+</body>
+</html>

@@ -58,7 +58,7 @@ public class GoogleNewsResource {
 		return new StreamingOutput() {
 			public void write(OutputStream outputStream)
 					throws IOException, WebApplicationException {
-				outputStream.write(JsonbProvider.provider().create().build().toJson(googleNewsService.processRequestCountry()).getBytes());
+				outputStream.write(JsonbProvider.provider().create().build().toJson(googleNewsService.processRequestCountry()).getBytes("UTF-8"));
 				outputStream.flush();
 			}
 		};
@@ -72,7 +72,7 @@ public class GoogleNewsResource {
 		return new StreamingOutput() {
 			public void write(OutputStream outputStream)
 					throws IOException, WebApplicationException {
-				outputStream.write(JsonbProvider.provider().create().build().toJson(googleNewsService.processRequestHealth()).getBytes());
+				outputStream.write(JsonbProvider.provider().create().build().toJson(googleNewsService.processRequestHealth()).getBytes("UTF-8"));
 				outputStream.flush();
 			}
 		};
@@ -86,7 +86,7 @@ public class GoogleNewsResource {
 		return new StreamingOutput() {
 			public void write(OutputStream outputStream)
 					throws IOException, WebApplicationException {
-				outputStream.write(JsonbProvider.provider().create().build().toJson(googleNewsService.processRequestSports()).getBytes());
+				outputStream.write(JsonbProvider.provider().create().build().toJson(googleNewsService.processRequestSports()).getBytes("UTF-8"));
 				outputStream.flush();
 			}
 		};
@@ -100,7 +100,7 @@ public class GoogleNewsResource {
 		return new StreamingOutput() {
 			public void write(OutputStream outputStream)
 					throws IOException, WebApplicationException {
-				outputStream.write(JsonbProvider.provider().create().build().toJson(googleNewsService.processRequestWorld()).getBytes());
+				outputStream.write(JsonbProvider.provider().create().build().toJson(googleNewsService.processRequestWorld()).getBytes("UTF-8"));
 				outputStream.flush();
 			}
 		};
@@ -114,7 +114,7 @@ public class GoogleNewsResource {
 		return new StreamingOutput() {
 			public void write(OutputStream outputStream)
 					throws IOException, WebApplicationException {
-				outputStream.write(JsonbProvider.provider().create().build().toJson(googleNewsService.processRequestEntertainement()).getBytes());
+				outputStream.write(JsonbProvider.provider().create().build().toJson(googleNewsService.processRequestEntertainement()).getBytes("UTF-8"));
 			}
 		};
 	}
@@ -127,7 +127,7 @@ public class GoogleNewsResource {
 		return new StreamingOutput() {
 			public void write(OutputStream outputStream)
 					throws IOException, WebApplicationException {
-				outputStream.write(JsonbProvider.provider().create().build().toJson(googleNewsService.processRequestSearch(search)).getBytes());
+				outputStream.write(JsonbProvider.provider().create().build().toJson(googleNewsService.processRequestSearch(search)).getBytes("UTF-8"));
 				outputStream.flush();
 			}
 		};

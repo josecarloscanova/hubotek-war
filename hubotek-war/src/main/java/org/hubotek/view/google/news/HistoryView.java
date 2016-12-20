@@ -35,7 +35,7 @@ public class HistoryView implements View{
 	public void prepare()
 	{
 		offSet = 0;
-		limit = 0;
+		limit = 100;
 	}
 	
 	@Override

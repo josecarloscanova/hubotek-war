@@ -18,7 +18,7 @@ src="js/angular-route.js">
 <div ng-view></div>
 <script type="text/javascript">
 angular.module('routingApp',['ngRoute'])
-.config(['$routeProvider', function($routeProvider) {
+.config(['$routeProvider' , function($routeProvider) {
 $routeProvider.when('/', {
 template: '<h5>This is the default route</h5>'
 })

@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<script src="js/angular.js"></script>
+<script src="js/jquery-3.1.1.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/jquery-ui/jquery-ui.js"></script>
+<link rel="stylesheet" href="css/bootstrap-theme.css" type="text/css">
+<link rel="stylesheet" href="css/bootstrap.css" type="text/css">
+<link rel="stylesheet" href="js/jquery-ui/jquery-ui.css" type="text/css">
+<title>Default Search Page on Design</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Pragma" content="no-cache">
+<style>
+	.results {margin-top:10px}
+	.result_count {margin-top:5px}
+</style>
+<script>
+	$(document).ready(function(){
+		$('.search_button').on('click' , function(event){
+			encodeURI($('#search_text').val());
+			event.preventDefault();
+			$.ajax (
+                {
+                 method:'GET',
+                 url:'http://localhost:8080/hubotek/hub/google/search',
+                 data: 's='+ encodeURI($('#search_text').val()) + '&sort='+$('#sort').val()+'&count='+$('#count').val()+'&startIndex='+$('#startIndex').val(),
+                 accepts: {
+       				 text: "application/json"
+    				},
+                 error:function(xhr,sts,error){console.log("" + sts + " " + error);},
+                 success:function(data,sts,xhr){resultProcessor.processResult(data);}
+               });
+		});
+		
+		var resultProcessor = { 
+			result : {}, 
+			processResult:function(data){
+				this.result = data;
+				this.processRequestTimeAndTotal();
+				this.fillQueryResults();
+			},
+			fillQueryResults : function(){
+					console.log(this.result);
+					$("#results").html('');
+					if (this.result.queries.request["0"].totalResults > 0) { 
+						let html = '';
+						$.each(this.result.items , function(index , element) {
+							html =  '<div id="'+index+'" class="result">'+'<a href="'+element.link+'" target="_blank">'+ element.htmlTitle +'</a>' + '</div>'; 
+							$(html).appendTo("#results");
+							$('<p>'+element.htmlSnippet+'</p>').appendTo("#"+index);
+						});
+					}	
+			},
+			processRequestTimeAndTotal:function(){
+				$('#result_count').html('<span>About :'+this.result.searchInformation.formattedTotalResults+ '</b> results on <b>(' +this.result.searchInformation.formattedSearchTime+') seconds</span>');
+			}
+		};
+	});
+</script>
+</head>
+<body>
+<div>
+	 <div class="container" style="margin-left:10px">
+		<form method="get" id="search_form" action="http://localhost:8080/hubotek/hub/google/search">
+			<input type="text" id="search_text" name="s" size="100" />
+				<select id="sort">
+					<option value="">Relevance</option>
+					<option value="date">Date</option>
+				</select>
+				<input type="submit" class="search_button">
+				<br />
+				<span><label for="count">Count :</label><input type="text" size="2" maxlength="2" id="count" name="count" value="10" ></input>
+				<label for="startIndex">Start Index :</label><input type="text" size="2" maxlength="2" id="startIndex" name="startIndex" value="1" ></input></span>
+		</form>
+		<div id="result_count" class="container-fluid result_count"></div>
+		<div id="results" class="container-fluid"></div>
+	 </div>
+</div>
+</body>
+</html>
