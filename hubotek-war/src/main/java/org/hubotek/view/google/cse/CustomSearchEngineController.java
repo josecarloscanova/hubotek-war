@@ -10,7 +10,6 @@ import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.apache.log4j.Logger;
 import org.hubotek.service.ejb.cse.GoogleCseKeyService;
 import org.hubotek.view.cse.GoogleCustomSearchEngineKey;
 import org.hubotek.web.Controller;

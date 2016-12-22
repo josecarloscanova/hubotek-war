@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en" ng-app="app">
+<head>
+<meta charset="utf-8">
+<title>My AngularJS App</title>
+</head>
+<body ng-controller="TempCtrl">
+Current temperature: <input ng-model='temp' type='number'/> Celcius
+<p ng-show="temp>=17">Not too bad! {{ temp }} degrees, {{ temp - 10
+}} would be a little cold</p>
+<p ng-show="temp<17">{{ temp }} degrees, is a little chilly, {{ temp
++ 10 }} would be a nicer</p>
+<ul ng-repeat="value in historyData">
+<li>{{ value.day | uppercase}} : {{ value.temp }}</li>
+</ul>
+<script src="js/angular.js"></script>
+<script>
+'use strict';
+angular.module('app', [])
+.controller('TempCtrl', ['$scope' , function($scope) {
+$scope.temp = 17;
+$scope.historyData = [
+{ day: 'saturday', temp: 8},
+{ day: 'sunday', temp: 13},
+{ day: 'monday',temp: 15},
+{ day: 'tuesday', temp: 11},
+{ day: 'wednesday',temp: 15},
+{ day: 'thursday',temp: 17},
+{ day: 'friday',temp: 21}
+]
+}]);
+</script>
+</body>
+</html>
