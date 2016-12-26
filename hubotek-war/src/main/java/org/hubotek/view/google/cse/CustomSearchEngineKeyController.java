@@ -17,7 +17,7 @@ import org.hubotek.web.Controller;
 @Controller
 @ManagedBean
 @RequestScoped
-public class CustomSearchEngineController {
+public class CustomSearchEngineKeyController {
 	
 	@EJB
 	GoogleCseKeyService googleCseKeyService;
@@ -29,7 +29,7 @@ public class CustomSearchEngineController {
 	
 	private List<?> googleCustomSearchKeys;
 	
-	public CustomSearchEngineController() {
+	public CustomSearchEngineKeyController() {
 		super();
 	}
 	

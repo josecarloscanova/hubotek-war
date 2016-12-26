@@ -8,23 +8,23 @@
 	template="templates/composition_template.xhtml">
 	<ui:define name="main_content">
 		<h:form acceptcharset="UTF-8">
-			<span><h:outputText>Key</h:outputText ><p:inputText size="40" id="key" value="#{customSearchEngineController.key}"/></span>
+			<span><h:outputText>Key</h:outputText ><p:inputText size="40" id="key" value="#{customSearchEngineKeyController.key}"/></span>
 			<br /> 
-			<span><h:outputText >Date Created:</h:outputText ><p:inputText id="dateCreated" value="#{customSearchEngineController.dateCreated}" converter="inputDateConverter" type="date"/></span>
+			<span><h:outputText >Date Created:</h:outputText ><p:inputText id="dateCreated" value="#{customSearchEngineKeyController.dateCreated}" converter="inputDateConverter" type="date"/></span>
 			<br />
 			<p:inplace id="checkboxInplace">
 				<f:facet name="output">
 				Yes or No
 				</f:facet>
 				<f:facet name="input">
-					<p:selectBooleanCheckbox  id="isListing" value="#{customSearchEngineController.isListing}"/>
+					<p:selectBooleanCheckbox  id="isListing" value="#{customSearchEngineKeyController.isListing}"/>
 				</f:facet>
 			</p:inplace>
-			<p:commandButton  action="#{customSearchEngineController.updateAndList()}" type="submit" value="submit" update="keyPanel"/>
-			<p:commandButton  action="#{customSearchEngineController.list()}" type="submit" value="list" update="keyPanel"/>
-			<p:commandButton  action="#{customSearchEngineController.delete()}" type="submit" value="delete" update="keyPanel"/>
+			<p:commandButton  action="#{customSearchEngineKeyController.updateAndList()}" type="submit" value="submit" update="keyPanel"/>
+			<p:commandButton  action="#{customSearchEngineKeyController.list()}" type="submit" value="list" update="keyPanel"/>
+			<p:commandButton  action="#{customSearchEngineKeyController.delete()}" type="submit" value="delete" update="keyPanel"/>
 			<p:outputPanel id="keyPanel">
-				<p:dataTable var="key" value="#{customSearchEngineController.googleCustomSearchKeys}" rendered="#{customSearchEngineController.isListing eq true}">
+				<p:dataTable var="key" value="#{customSearchEngineKeyController.googleCustomSearchKeys}" rendered="#{customSearchEngineKeyController.isListing eq true}">
 						<p:column headerText="Key">
 							<h:outputText value="#{key.key}" />
 						</p:column>
