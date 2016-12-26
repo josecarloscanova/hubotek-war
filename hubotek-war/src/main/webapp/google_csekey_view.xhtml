@@ -26,7 +26,7 @@
 			<p:outputPanel id="keyPanel">
 				<p:dataTable var="key" value="#{customSearchEngineKeyController.googleCustomSearchKeys}" rendered="#{customSearchEngineKeyController.isListing eq true}">
 						<p:column headerText="Key">
-							<h:outputText value="#{key.key}" />
+							<h:outputText value="#{key.key}" />vf 
 						</p:column>
 						<p:column headerText="DateCreated">
 							<h:outputText value="#{key.dateCreated}"  converter="inputDateConverter"/>
