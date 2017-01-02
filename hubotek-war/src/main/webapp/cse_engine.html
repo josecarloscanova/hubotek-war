@@ -1,0 +1,62 @@
+<html lang="pt_BR">
+<head> 
+<script src="js/angular.js"></script>
+<script src="js/jquery-3.1.1.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/jquery-ui/jquery-ui.js"></script>
+<link rel="stylesheet" href="css/bootstrap-theme.css" type="text/css">
+<link rel="stylesheet" href="css/bootstrap.css" type="text/css">
+<link rel="stylesheet" href="js/jquery-ui/jquery-ui.css" type="text/css">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Pragma" content="no-cache">
+</head>
+<body>
+<form  method="post" action="http://localhost:8080/hubotek/hub/cse" id="formData">
+	<span>Definition:<input type="text" required  size="40" id="identification" name="identification" /></span>
+	<br /> 
+	<span>Description:<input type="text"  required size="40" id="description"  name="description" /></span>
+	<br />
+	<span>Date Created:<input  required id="dateCreated"   name="dateCreated" type="date" min="2017-01-01" max="2018-01-01"/></span>
+	<br />
+	<input type="submit" id="submit"/>
+	<input type="reset" id="reset"/>
+</form>
+<script>
+function mascaraDataString(arg){
+		var dateStr = "";
+		options = {year: 'numeric' , month: 'numeric' , day: 'numeric' , timeZone: 'Europe/London'}; 
+		try{
+			dateParsed =  Date.parse(arg);
+			dateStr = new Date(dateParsed).toLocaleDateString('pt-BR' , options);
+		}catch (e){
+			console.log(e);
+		}
+		return dateStr;
+	}
+function mascaraDataString1(arg){
+		var dateStr = "";
+		options = {year: 'numeric' , month: 'numeric' , day: 'numeric'}; 
+		try{
+			dateParsed =  Date.parse(arg);
+			dateStr = new Date(dateParsed).toLocaleDateString('pt-BR' , options);
+		}catch (e){
+			console.log(e);
+		}
+		return dateStr;
+	}	
+$(document).ready(function(){
+	
+		$('#formData').on('submit' , function(event){
+			event.preventDefault();
+		});
+		
+		$('#dateCreated').on('change' , function(event){ 
+			console.log($('#dateCreated').val());
+			console.log(mascaraDataString($('#dateCreated').val()));
+			console.log(mascaraDataString1($('#dateCreated').val()));
+			$('#dateCreated').val = mascaraDataString($('#dateCreated').val());
+		});
+	});
+</script>
+</body>
+</html>

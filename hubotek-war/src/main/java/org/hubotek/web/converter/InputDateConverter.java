@@ -8,7 +8,6 @@ import java.util.Optional;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
-import javax.faces.convert.FacesConverter;
 
 import org.hubotek.HubotekException;
 
@@ -31,7 +30,7 @@ public class InputDateConverter implements Converter{
 	@Override
 	public String getAsString(FacesContext context, UIComponent component,
 			Object value) {
-		return new SimpleDateFormat("yyyy/MM/dd").format((Date)Optional.ofNullable(value).orElse(null));
+		return new SimpleDateFormat("yyyy-MM-dd").format((Date)Optional.ofNullable(value).orElse(null));
 	}
 
 }

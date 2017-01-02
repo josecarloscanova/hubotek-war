@@ -36,11 +36,10 @@ Add More Items
 </div>
 </div>
 </div>
-<script
-src="js/angular.js">
-</script>
+<script src="js/soapclient.js"></script>
+<script src="js/angular.js"></script>
 <script>
-angular.module('notesApp', [])
+angular.module('notesApp', ['angularSoap'])
 .controller('MainCtrl', [function() {
 var self = this;
 self.tab = 'first';
@@ -48,13 +47,16 @@ self.open = function(tab) {
 self.tab = tab;
 };
 }])
-.controller('SubCtrl', ['ItemService',
-function(ItemService) {
+.controller('SubCtrl', ['$soap','ItemService',
+function($soap , ItemService) {
 var self = this;
 self.list = function() {
 return ItemService.list();
 };
 self.add = function() {
+$soap.post('http://localhost:8080/hubotek/CseService','listEnginesJSON').then(function(response){
+	console.log(response.data);
+});
 ItemService.add({
 id: self.list().length + 1,
 label: 'Item ' + self.list().length
@@ -74,6 +76,38 @@ add: function(item) {
 items.push(item);
 }
 };
+}]);
+angular.module('angularSoap', [])
+
+.factory("$soap",['$q',function($q){
+	return {
+		post: function(url, action, params){
+			var deferred = $q.defer();
+			
+			//Create SOAPClientParameters
+			var soapParams = new SOAPClientParameters();
+			for(var param in params){
+				soapParams.add(param, params[param]);
+			}
+			
+			//Create Callback
+			var soapCallback = function(e){
+				if(e.constructor.toString().indexOf("function Error()") != -1){
+					deferred.reject("An error has occurred.");
+				} else {
+					deferred.resolve(e);
+				}
+			}
+			
+			SOAPClient.invoke(url, action, soapParams, true, soapCallback);
+
+			return deferred.promise;
+		},
+		setCredentials: function(username, password){
+			SOAPClient.username = username;
+			SOAPClient.password = password;
+		}
+	}
 }]);
 </script>
 </body>

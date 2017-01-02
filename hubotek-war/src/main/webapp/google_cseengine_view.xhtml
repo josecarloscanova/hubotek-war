@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	template="templates/composition_template.xhtml">
+	<ui:define name="main_content">
+		<form jsf:id="form1">
+			<p:remoteCommand name="onCellEdit" update=":form1:keyPanel :form1:inputPanel" action="#{cseListView.list()}" onsuccess="formatDateCreateColumn()"/>
+			<p:outputPanel id="inputPanel">
+				<span>Definition:<p:inputText size="40" id="definition" value="#{customSearchEngineController.identification}"/></span>
+				<br /> 
+				<span>Description:<p:inputText size="40" id="description" value="#{customSearchEngineController.description}"/></span>
+				<br />
+				<span>Date Created:<p:inputText id="dateCreated" value="#{customSearchEngineController.dateCreated}" converter="inputDateConverter" type="date"/></span>
+				<br />
+				<p:commandButton  action="#{customSearchEngineController.update()}" type="submit" value="submit" oncomplete="onCellEdit()"/>
+				<p:commandButton  action="#{customSearchEngineController.delete()}" type="submit" value="delete" oncomplete="onCellEdit()"/>
+			</p:outputPanel>	
+			<p:outputPanel id="keyPanel">
+					<p:dataTable var="engine" value="#{cseListView.engines}" >
+							<p:column headerText="Definition">
+								 <p:commandLink action="#{customSearchEngineController.findEngine(engine.identification)}" update=":form1:inputPanel">
+								 	<h:outputText value="#{engine.identification}" />
+								 </p:commandLink>
+							</p:column>
+							<p:column headerText="Description">
+								<h:outputText value="#{engine.description}" />
+							</p:column>
+							<p:column headerText="DateCreated">
+								<h:outputText value="#{engine.dateCreated}" styleClass="date"/>
+							</p:column>
+					</p:dataTable>
+			</p:outputPanel>
+		</form>
+	<script>
+	function mascaraDataString(arg){
+		var dateStr = "";
+		options = {year: 'numeric' , month: 'numeric' , day: 'numeric'}; 
+		try{
+			dateParsed =  Date.parse(arg);
+			dateStr = new Date(dateParsed).toLocaleDateString('pt-BR' , options);
+		}catch (e){
+			console.log(e);
+		}
+		return dateStr;
+	}
+	formatDateCreateColumn = function()
+	{ 
+		$.each($('.date'), function(idx , item){
+			item.textContent = mascaraDataString(item.html()));
+		});
+	}
+	$(document).ready(function(){
+		formatDateCreateColumn();
+	});
+	</script>	
+	</ui:define>
+</ui:composition>

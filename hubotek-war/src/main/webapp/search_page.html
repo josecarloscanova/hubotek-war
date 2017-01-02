@@ -3,6 +3,7 @@
 <head>
 <script src="js/angular.js"></script>
 <script src="js/jquery-3.1.1.js"></script>
+<script src="js/jquery-soap.js"></script>
 <script src="js/bootstrap.js"></script>
 <script src="js/jquery-ui/jquery-ui.js"></script>
 <link rel="stylesheet" href="css/bootstrap-theme.css" type="text/css">
@@ -17,6 +18,7 @@
 </style>
 <script>
 	$(document).ready(function(){
+	jQuery.support.cors = true;
 		$('.search_button').on('click' , function(event){
 			encodeURI($('#search_text').val());
 			event.preventDefault();
@@ -31,6 +33,17 @@
                  error:function(xhr,sts,error){console.log("" + sts + " " + error);},
                  success:function(data,sts,xhr){resultProcessor.processResult(data);}
                });
+		});
+		
+		$('.soap_button').on('click' , function(event){
+			$.soap({
+				    url: 'http://localhost:8080/hubotek/CseService',
+				    method: 'listEnginesJSON',
+				    appendMethodToURL: false,
+				    data: {},
+				    success: function (soapResponse) {
+				     		console.log(soapResponse);}
+				     });
 		});
 		
 		var resultProcessor = { 
@@ -69,6 +82,7 @@
 					<option value="date">Date</option>
 				</select>
 				<input type="submit" class="search_button">
+				<input type="button" class="soap_button" value="Soap Button">
 				<br />
 				<span><label for="count">Count :</label><input type="text" size="2" maxlength="2" id="count" name="count" value="10" ></input>
 				<label for="startIndex">Start Index :</label><input type="text" size="2" maxlength="2" id="startIndex" name="startIndex" value="1" ></input></span>
